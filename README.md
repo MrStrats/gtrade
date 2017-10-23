@@ -1,2 +1,5 @@
-# Gtrade
-Gtrade is a Python tool that creates a user-interface for interacting with the GDAX.com API.
+# gtrade
+gtrade is a command-line UI for interacting with the GDAX.com.
+
+### To Update
+* **Feaure** x
