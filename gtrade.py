@@ -1,13 +1,13 @@
 import GDAX, datetime, time, gtrade_api, gtrade_prices
 import numpy as np
 from gtrade_api import *
-from gtrade_prices import *
+#from gtrade_prices import *
 
 
 
 trade = 'ON'
-buyprice = buyat   # Feed in gtrade_prices
-sellprice = sellat # Feed in gtrade_prices
+buyprice = 2.1  # Feed in gtrade_prices
+sellprice = 6000 # Feed in gtrade_prices
 
 buyfee = .003
 requestrate = 1 # seconds, how often GDAX is pinged for data    THIS IS THE SPEED OF PULLS

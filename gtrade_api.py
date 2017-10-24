@@ -22,5 +22,8 @@ btcaccount = ""
 ltcaccount = ""
 usdaccount = "GDAX USD WALLET #"
 
+###############################
+######## STOP SETTING #########
+###############################
 
 

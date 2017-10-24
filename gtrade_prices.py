@@ -1,5 +1,9 @@
+
+
+###############################################
 ####  BUY / SELL POINTS for the program... ####
 ###############################################
+
 
 
 ###############################
@@ -8,17 +12,24 @@
 
 #### Bitcoin ###
 ###### BTC #####
-sellat = #current Price + 5
-buyat = #current Price - 5
+
+sellat = 0 #current Price 
+buyat = 0 #current Price 
 
 #### Ethereum ###
 ###### ETH ######
-sellat = #current Price + 5
-buyat = #current Price - 5
+
+sellat = 0 #current Price 
+buyat =  0#current Price 
 
 #### Litecoin ###
 ###### LTC ######
-sellat = #current Price + 5
-buyat = #current Price - 5
 
+sellat = 0 #current Price 
+buyat = 0 #current Price 
+
+
+###############################
+######## STOP SETTING #########
+###############################
 
