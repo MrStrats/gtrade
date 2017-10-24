@@ -11,7 +11,7 @@
 # bitcoinTrading = "off"
 
 bitcoinTrading = "OFF"
-ethereumTrading = "ON"
+ethereumTrading = "OFF"
 litecoinTrading = "OFF"
 
 coinusd = "COIN-USD"
