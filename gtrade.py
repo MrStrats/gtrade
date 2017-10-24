@@ -1,15 +1,16 @@
-import GDAX, datetime, time, gtrade_api
+import GDAX, datetime, time, gtrade_api, gtrade_prices
 import numpy as np
 from gtrade_api import *
+from gtrade_prices import *
 
 ### SET THESE VARIABLES
 trade = 'ON'
-buyat = 211.52
-sellat = 210.56
+buyat = 211.52   # Feed in gtrade_prices
+sellat = 210.56 # Feed in gtrade_prices
 
 buyfee = .003
 requestrate = 1 # seconds, how often GDAX is pinged for data    THIS IS THE SPEED OF PULLS
-terminalupdates = 0 # minutes, how often you want a terminal update
+terminalupdates = 0 # minutes, how often you want a terminal update,
 ###
 
 ### CODE STARTS HERE ###############################################################################################################
@@ -78,7 +79,7 @@ print ("")
 
 
 
-print ("""
+
 # core trading engine
 if trade == 'ON':
         while True: # runs in continuous loop
@@ -115,4 +116,4 @@ if trade == 'ON':
                 runseconds += requestrate # add run seconds to counter
 
 
-                """)
+                
