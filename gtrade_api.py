@@ -1,25 +1,21 @@
+#      THIS FILE MUST REMAIN CONFIDENTIAL!!!! 
+#       THIS FILE CONTAINS KEYS THAT WOULD ALLOW
+#         ANYONE TO GAIN ACCESS TO YOUR GDAX ACCOUNT!!!
+#
+#       MAKE SURE TO KEEP THE CONTENTS OF THIS FILE SECURE!!!
+#
+#
+
 import GDAX
 
 # This file separates the user's private data from the trading code
 
 # USER API / ACCOUNTS
-authClient = GDAX.AuthenticatedClient('Unique 32 character account #', 'Account Key #', 'final account #')
-ethaccount = 'GDAX ETH WALLET #'
-usdaccount = 'GDAX USD WALLET #' 
+authClient = GDAX.AuthenticatedClient("Unique 32 character account #", "Account Key #", "final account #")
+ethaccount = "GDAX ETH WALLET #"
+btcaccount = ""
+ltcaccount = ""
+usdaccount = "GDAX USD WALLET #"
 
 
 
-# GET ACCOUNT IDS
-
-"""
-account = 0
-while True:
-        try:
-                if (authClient.getAccounts()[account].get('currency') == 'USD') or (authClient.getAccounts()[account].get('currency') == 'ETH'):
-                        print authClient.getAccounts()[account].get('currency')
-                        print authClient.getAccounts()[account].get('id')
-                account = account + 1
-        except:
-                exit()
-
-"""
