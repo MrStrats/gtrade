@@ -7,12 +7,14 @@
 
 # Use on /off
 # Ex: 
-# bitcoinTrading = on
-# bitcoinTrading = off
+# bitcoinTrading = "on"
+# bitcoinTrading = "off"
 
-bitcoinTrading = "on"
-ethereumTrading = "on"
-litecoinTrading = "on"
+bitcoinTrading = "OFF"
+ethereumTrading = "ON"
+litecoinTrading = "OFF"
+
+coinusd = "COIN-USD"
 
 ###############################
 ######## STOP SETTING #########
@@ -21,13 +23,14 @@ litecoinTrading = "on"
 
 # If coins are on, find prices and store info... Ready to send to main program for processing...
 
-if bitcoinTrading:
-    then
-    
+if bitcoinTrading == "ON":
+    coinusd = "BTC-USD"
 
-if ethereumTrading:
-    then
+if ethereumTrading == "ON":
+    coinusd = "ETH-USD"
+
+if litecoinTrading == "ON":
+    coinusd = "LTC-USD"
 
 
-if litecoinTrading:
-    then
+print (coinusd)

@@ -1,6 +1,7 @@
 import GDAX, datetime, time, gtrade_api, gtrade_prices
 import numpy as np
 from gtrade_api import *
+from coinselect import *
 #from gtrade_prices import *
 
 
@@ -8,6 +9,7 @@ from gtrade_api import *
 trade = 'ON'
 buyprice = 2.1  # Feed in gtrade_prices
 sellprice = 6000 # Feed in gtrade_prices
+print (coinusd)
 
 buyfee = .003
 requestrate = 1 # seconds, how often GDAX is pinged for data    THIS IS THE SPEED OF PULLS
@@ -28,7 +30,7 @@ def gtradebuy(price, size):
         buyParams = {
         'price': price, #USD
         'size': size,
-        'product_id': 'ETH-USD'  #CHANGE!!
+        'product_id': 'coinusd'  #CHANGE!!
         }
         gtrade_api.authClient.buy(buyParams)
 
@@ -37,7 +39,7 @@ def gtradesell(price, size):
         sellParams = {
         'price': price, #USD
         'size': size,
-        'product_id': 'ETH-USD'   #CHANGE!!
+        'product_id': 'coinusd'   #CHANGE!!
         }
         gtrade_api.authClient.sell(sellParams)
 
@@ -73,7 +75,7 @@ print ("- Terminal updates every " + str (terminalupdates) + " minutes")  #
 print ("_" * 40)
 print ("")
 
-#gtrade_api.authClient.cancelOrders(product_id="ETH-USD") # cancel all orders
+#gtrade_api.authClient.cancelOrders(product_id="coinusd") # cancel all orders
 
 
 
@@ -84,13 +86,13 @@ print ("")
 # core trading engine
 if trade == 'ON':
         while True: # runs in continuous loop
-                bid = publicClient.getProductTicker(product="ETH-USD").get('bid') #pulls highest bid
-                ask = publicClient.getProductTicker(product="ETH-USD").get('ask') #pulls lowest ask
+                bid = publicClient.getProductTicker(product="coinusd").get('bid') #pulls highest bid
+                ask = publicClient.getProductTicker(product="coinusd").get('ask') #pulls lowest ask
                 try:
                         orders = gtrade_api.authClient.getOrders() #attempts to pull open orders
                         orderside = orders[0][0].get('side') #attempts to pull order "side", i.e. buy/sell
                 except: # if try fails, do this...
-                        fills = gtrade_api.authClient.getFills(productId="ETH-USD")
+                        fills = gtrade_api.authClient.getFills(productId="coinusd")
                         fillside = fills[0][0].get('side') #get the 'side' of the last order filled
                         if fillside == 'buy': # if the last order filled was a buy, execute sell order
                                 ethquantity = gtrade_api.authClient.getAccount(gtrade_api.ethaccount).get('available') # pull ETH available in account
