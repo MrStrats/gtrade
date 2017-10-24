@@ -322,9 +322,7 @@ if access == True:
         # TESTING
         elif choice == "z.":
             try:
-                gtrade_sell('ETH-USD', '400.12', '.51231234')
-                time.sleep(1)
-                gtrade_sell('ETH-USD', '401.12', '.51251234')
+                print('To be coded...')
             except:
                 e = sys.exc_info()[0]
                 print("\nAPI ERROR: " + e)
