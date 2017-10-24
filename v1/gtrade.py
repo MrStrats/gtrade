@@ -9,7 +9,7 @@ from coinselect import *
 trade = 'ON'
 buyprice = 2.1  # Feed in gtrade_prices
 sellprice = 6000 # Feed in gtrade_prices
-print (coinusd)
+
 
 buyfee = .003
 requestrate = 1 # seconds, how often GDAX is pinged for data    THIS IS THE SPEED OF PULLS
@@ -30,7 +30,7 @@ def gtradebuy(price, size):
         buyParams = {
         'price': price, #USD
         'size': size,
-        'product_id': 'coinusd'  #CHANGE!!
+        'product_id': (coinusd)  
         }
         gtrade_api.authClient.buy(buyParams)
 
@@ -39,7 +39,7 @@ def gtradesell(price, size):
         sellParams = {
         'price': price, #USD
         'size': size,
-        'product_id': 'coinusd'   #CHANGE!!
+        'product_id': (coinusd)   
         }
         gtrade_api.authClient.sell(sellParams)
 
