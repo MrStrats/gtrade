@@ -1,7 +1,9 @@
 import time
 from gtrade_api import *
 
-
+####
+####  ENTER YOUR GDAX ACCOUNT AND RUN THE SCRIPT
+####    THE OUTPUT SHOULD BE THEN PASTED INTO THE gtrade_api.py file
 
 # GET ACCOUNT IDS
 
