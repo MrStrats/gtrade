@@ -1,14 +1,17 @@
-import gdax, time, math, sys
+import gdax # GDAX API
+import time # for sleep
+import math # for 
+import sys #
 
 ################################################################################################
 ## API
 
+# GDAX Public client
 publicClient = gdax.PublicClient()
 
 # USER API / ACCOUNTS
 # key, b64secret, passphrase
 authClient = gdax.AuthenticatedClient('x', 'x', 'x')
-
 
 ################################################################################################
 ## FUNCTIONS
@@ -46,7 +49,6 @@ def gtrade_printMenu():
 
 gtrade_printMenu()
 
-
 ######################################################################################################################
 ## CHECK INPUTS
 
@@ -58,56 +60,7 @@ def keeprunning():
     # PLACE ORDER
     if choice == "1a":
         print("\n* PLACE ORDER *\n")
-        side = input("buy or sell?  ")
-        if side == "buy" or side == "sell":
-            market = input("Market (BTC-USD):  ")
-            quantity = input("Input quantity:  ")       
-            order = input("limit or market order?  ")
-
-            # ask if you want to designate specific rate
-            if order == "limit":
-                rate = input("Rate? (leave blank for auto)  ")
-            
-            # place orders
-            try:
-                ticker = bittrex.get_market_summaries()["result"]
-
-                # function to find bid or ask
-                def findBidAsk(mkt, BidorAsk):
-                    for c in ticker: # for coin
-                        if c["MarketName"] == mkt: # if market matches
-                            if BidorAsk == "Bid":
-                                rate = c['Bid'] + 0.00000001 # take bid and add incremental  
-                            elif BidorAsk == "Ask":
-                                rate = c['Ask'] - 0.00000001 # take ask and remove incremental   
-                            return rate
-
-                if order == "limit":                 
-                    if side == "buy":
-                        # change rate to auto if necessary
-                        if rate == "":
-                            rate = findBidAsk(market, "Bid")
-                        bittrex.buy_limit(market, quantity, rate) # limit buy
-                        print("\nOrder placed")
-                    else:
-                        # change rate to auto if necessary
-                        if rate == "":
-                            rate = findBidAsk(market, "Ask")
-                        bittrex.sell_limit(market, quantity, rate) # limit sell
-                        print("\nOrder placed")
-                elif order == "market":
-                    if side == "buy":
-                        bittrex.buy_market(market, quantity) # market buy
-                        print("\nOrder placed")
-                    else:
-                        bittrex.sell_market(market, quantity) # market sell
-                        print("\nOrder placed")
-                else:
-                    print("\nCancelled")
-            except:
-                print("API ERROR")
-        else:
-            print("\nCancelled")
+        print('To be coded...')
 
     ###############################################################################################
     # OPEN ORDERS
@@ -300,6 +253,6 @@ def keeprunning():
     elif choice == "exit":
         exit()
 
-# repeat the inputs
+# Repeat the inputs / keep things running
 while True:
     keeprunning()
