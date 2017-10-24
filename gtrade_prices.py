@@ -2,19 +2,23 @@
 ###############################################
 
 
+###############################
+##### SET THESE VARIABLES #####
+###############################
+
 #### Bitcoin ###
 ###### BTC #####
-sellat = 
-buyat = 
+sellat = #current Price + 5
+buyat = #current Price - 5
 
 #### Ethereum ###
 ###### ETH ######
-sellat = 
-buyat = 
+sellat = #current Price + 5
+buyat = #current Price - 5
 
 #### Litecoin ###
 ###### LTC ######
-sellat = 
-buyat = 
+sellat = #current Price + 5
+buyat = #current Price - 5
 
 

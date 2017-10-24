@@ -10,6 +10,11 @@ import GDAX
 
 # This file separates the user's private data from the trading code
 
+
+###############################
+##### SET THESE VARIABLES #####
+###############################
+
 # USER API / ACCOUNTS
 authClient = GDAX.AuthenticatedClient("Unique 32 character account #", "Account Key #", "final account #")
 ethaccount = "GDAX ETH WALLET #"

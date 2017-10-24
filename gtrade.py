@@ -3,10 +3,11 @@ import numpy as np
 from gtrade_api import *
 from gtrade_prices import *
 
-### SET THESE VARIABLES
+
+
 trade = 'ON'
-buyat = 211.52   # Feed in gtrade_prices
-sellat = 210.56 # Feed in gtrade_prices
+buyprice = buyat   # Feed in gtrade_prices
+sellprice = sellat # Feed in gtrade_prices
 
 buyfee = .003
 requestrate = 1 # seconds, how often GDAX is pinged for data    THIS IS THE SPEED OF PULLS
@@ -65,8 +66,8 @@ print ("""
 
 """)
 print ("Initial Settings:")
-print ("- Buy at " + str (round(buyat,2)))  # This makes sure every "buyat" is rounded off so we have the same number of precision in decimal points
-print ("- Sell at " + str (round(sellat,2))) # This makes sure every "sellat" is rounded off so we have the same number of precision in decimal points
+print ("- Buy at " + str (round(buyprice,2)))  # This makes sure every "buyprice" is rounded off so we have the same number of precision in decimal points
+print ("- Sell at " + str (round(sellprice,2))) # This makes sure every "sellprice" is rounded off so we have the same number of precision in decimal points
 print ("- Trading rate of " + str (requestrate) + " seconds") # Pick the speed of all requests
 print ("- Terminal updates every " + str (terminalupdates) + " minutes")  #
 print ("_" * 40)
@@ -95,15 +96,15 @@ if trade == 'ON':
                                 ethquantity = gtrade_api.authClient.getAccount(gtrade_api.ethaccount).get('available') # pull ETH available in account
                                 ethquantity = float(ethquantity) * (1-buyfee)
                                 ethquantity = round(ethquantity,8)
-                                gtradesell(round(sellat,2),ethquantity) # post sell order
-                                print (now() + " - BOUGHT " + str (round(float(fills[0][0].get("size")),2)) + " at " + str (round(float(fills[0][0].get("price")),2)) + " - Now selling " + str (round(ethquantity,2)) + " at " + str (sellat))
+                                gtradesell(round(sellprice,2),ethquantity) # post sell order
+                                print (now() + " - BOUGHT " + str (round(float(fills[0][0].get("size")),2)) + " at " + str (round(float(fills[0][0].get("price")),2)) + " - Now selling " + str (round(ethquantity,2)) + " at " + str (sellprice))
                                 numtrades = numtrades + 1
                         elif fillside == 'sell': # if the last order filled was a sell, execute buy order
                                 usdquantity = gtrade_api.authClient.getAccount(gtrade_api.usdaccount).get('available') # pull USD available in account
-                                buyquantity = (float(usdquantity)*(1-buyfee)) / round(buyat,2)
+                                buyquantity = (float(usdquantity)*(1-buyfee)) / round(buyprice,2)
                                 buyquantity = round(buyquantity,8)
-                                gtradebuy(round(buyat,2),buyquantity) # post buy order
-                                print (now() + " - SOLD " + str (round(float(fills[0][0].get("size")),2)) + " at " + str (round(float(fills[0][0].get("price")),2)) + " - Now buying " + str (round(buyquantity,2)) + " at " + str (buyat))
+                                gtradebuy(round(buyprice,2),buyquantity) # post buy order
+                                print (now() + " - SOLD " + str (round(float(fills[0][0].get("size")),2)) + " at " + str (round(float(fills[0][0].get("price")),2)) + " - Now buying " + str (round(buyquantity,2)) + " at " + str (buyprice))
                                 numtrades = numtrades + 1
                         else:
                                 print ("ERROR")
