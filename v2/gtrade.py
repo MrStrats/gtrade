@@ -136,10 +136,17 @@ if access == True:
         1b |  Show open orders
         1c |  Cancel all orders
 
+
         2a  |  Spread Sell Orders
         2b  |  Spread Buy Orders
 
+
+        3a |  Auto Trade (Ping Method)
+        3b |  Auto Trade orders (Range Bound) *Not Working*
+
+
         z. |  TESTING
+
 
         ?  |  Menu
         ~  |  Market Summary
@@ -318,6 +325,18 @@ if access == True:
                 e = sys.exc_info()[0]
                 print("\nAPI ERROR: " + e)
                 
+        ###############################################################################################
+        # AUTO TRADE (Ping Method)
+        elif choice == "3a":
+            print("\n* Enter the coin type: *\n")
+            currency = input("Currency? (e.g. 'BTC')  ")
+
+        ###############################################################################################
+        # AUTO TRADE (Range Method)
+        elif choice == "3b":
+            print("\n* Enter the coin type: *\n")
+            currency = input("Currency? (e.g. 'BTC')  ")
+
         ###############################################################################################
         # TESTING
         elif choice == "z.":
