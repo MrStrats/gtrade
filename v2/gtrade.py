@@ -154,7 +154,7 @@ if access == True:
 
 
         3a |  Auto Trade (Ping Method)
-        3b |  Auto Trade orders (Range Bound) *Not Working*
+        3b |  Auto Trade (Range Bound) *Not Working*
 
 
         z. |  TESTING
