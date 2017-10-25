@@ -193,15 +193,15 @@ if access == True:
                     # Limit orders
                     if order == "limit":                 
                         if side == "buy":
-                            # If rate = auto, take lowest bid and add incremental
+                            # If rate = auto, find bid
                             if rate == "":
-                                rate = ticker['bid'] + 0.01
+                                rate = ticker['bid']
                             gtrade_buy(market, round(rate, 2), round(volume, 8))
                             print("\nOrder placed")
                         else:
-                            # change rate to auto if necessary
+                            # If rate = auto, find ask
                             if rate == "":
-                                rate = ticker['ask'] - 0.01
+                                rate = ticker['ask']
                             gtrade_sell(market, round(rate, 2), round(volume, 8))
                             print("\nOrder placed")
                     # Market order
