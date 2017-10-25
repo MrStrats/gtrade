@@ -144,21 +144,17 @@ if access == True:
             print("""
         * MENU *
 
-        1a |  Place order (NOT READY)
+        1a |  Place order (needs to be tested)
         1b |  Show open orders
         1c |  Cancel all orders
-
 
         2a  |  Spread Sell Orders
         2b  |  Spread Buy Orders
 
-
         3a |  Auto Trade (Ping Method)
         3b |  Auto Trade (Range Bound) *Not Working*
 
-
         z. |  TESTING
-
 
         ?  |  Menu
         ~  |  Market Summary
@@ -179,7 +175,54 @@ if access == True:
         # PLACE ORDER
         if choice == "1a":
             print("\n* PLACE ORDER *\n")
-            print('To be coded...')
+            side = input("buy or sell?  ")
+            if side == "buy" or side == "sell":
+                market = input("Market (e.g. 'BTC-USD'):  ")
+                volume = input("Input volume:  ")       
+                order = input("limit or market order?  ")
+
+                # ask if you want to designate specific rate
+                if order == "limit":
+                    rate = input("Rate? (leave blank for auto)  ")
+                
+                # place orders
+                try:
+                    # grab tickers
+                    ticker = gdax_public.get_product_ticker(market)
+
+                    # Limit orders
+                    if order == "limit":                 
+                        if side == "buy":
+                            # If rate = auto, take lowest bid and add incremental
+                            if rate == "":
+                                rate = ticker['bid'] + 0.01
+                            gtrade_buy(market, round(rate, 2), round(volume, 8))
+                            print("\nOrder placed")
+                        else:
+                            # change rate to auto if necessary
+                            if rate == "":
+                                rate = ticker['ask'] - 0.01
+                            gtrade_sell(market, round(rate, 2), round(volume, 8))
+                            print("\nOrder placed")
+                    # Market order
+                    elif order == "market":
+                        if side == "buy":
+                            rate = ticker['ask'] * 1.1 # high ask to ensure execution
+                            gtrade_buy(market, round(rate, 2), round(volume, 8))
+                            print("\nOrder placed")
+                        else:
+                            rate = ticker['bid'] * .9 # low bid to ensure execution
+                            gtrade_sell(market, round(rate, 2), round(volume, 8))
+                            print("\nOrder placed")
+                    else:
+                        print("\nCancelled")
+                # Error
+                except:
+                    e = sys.exc_info()[0]
+                    print("\nAPI ERROR: " + e)
+            # If not buy or sell, cancel
+            else:
+                print("\nCancelled")
 
         ###############################################################################################
         # OPEN ORDERS
@@ -393,11 +436,9 @@ if access == True:
         ###############################################################################################
         # TESTING
         elif choice == "z.":
-            try:
-                print('To be coded...')
-            except:
-                e = sys.exc_info()[0]
-                print("\nAPI ERROR: " + e)
+            print('To be coded...')
+            test = gdax_public.get_product_ticker('ETH-USD')
+            print(test)
 
         ###############################################################################################
         # SHOW MENU
