@@ -343,7 +343,28 @@ if access == True:
             print("\n* AUTO TRADE (Ping Method) *\n")
             currency = input("Currency? (e.g. 'BTC')  ")
 
+            def available_currency():
+                accounts = gdax_authClient.get_accounts()
+                for a in accounts:
+                    if a['currency'] == currency:
+                        return float(a['available'])
 
+            def available_USD():
+                accounts = gdax_authClient.get_accounts()
+                for a in accounts:
+                    if a['currency'] == "USD":
+                        return round(float(a['available']),2)
+
+            try:
+                # Get and print available USD
+                availableUSD = available_USD()
+                print ("")
+                print ("Choose the buy and sell points: ")
+                print ("")
+                low = float(input("Low:  "))
+                high = float(input("High:  "))
+
+            
         
 
         ###############################################################################################
