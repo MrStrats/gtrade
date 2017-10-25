@@ -424,13 +424,11 @@ if access == True:
                 low = round(float(input("     Buy: ")),2)
                 high = round(float(input("    Sell: ")),2)
 
-                # DETECT CASH OR COIN
-
                 print ("\n What is that max amount of USD you wish to trade each buy/sell cycle? \n")
                 maxCash = round(float(input("     (For Max Leave Blank): ")),2)
 
 
-
+                #LOGIC TO FIND PREVIOUS BUY OR SELL AND THEN EXECUTE THE TRADE CYCLE!!!
 
                 #gdax_authClient.buy(price='100', size='1', product_id="BTC-USD")
 
