@@ -355,14 +355,32 @@ if access == True:
                     if a['currency'] == "USD":
                         return round(float(a['available']),2)
 
+
+            available_currency = available_currency()
+            availableUSD = available_USD()
+
+
+
             try:
+
+                print ("\n" * 2)
+                print ("_" * 20)
+                print ("\n GDAX Trade Wallet")
+                print ("_" * 20)
+                print ("\n Total " + currency + ": " + str(available_currency))
+                print (" Total USD: " + str(available_USD) + ". \n")
+
                 # Get and print available USD
-                availableUSD = available_USD()
-                print ("")
-                print ("Choose the buy and sell points: ")
-                print ("")
-                low = float(input("Low:  "))
-                high = float(input("High:  "))
+                print ("\n Choose the buy and sell points: \n")
+                low = float(input("Buy:  "))
+                high = float(input("Sell:  "))
+
+                #gdax_authClient.buy(price='100', size='1', product_id="BTC-USD")
+
+            except:
+                e = sys.exc_info()[0]
+                print("\TRADER ERROR: " + e)
+
 
             
         
