@@ -384,40 +384,50 @@ if access == True:
         # AUTO TRADE (Ping Method)
         elif choice == "3a":
             print("\n* AUTO TRADE (Ping Method) *\n")
-            currency = input("Currency? (e.g. 'BTC')  ")
-
-            def available_currency():
-                accounts = gdax_authClient.get_accounts()
-                for a in accounts:
-                    if a['currency'] == currency:
-                        return float(a['available'])
-
-            def available_USD():
-                accounts = gdax_authClient.get_accounts()
-                for a in accounts:
-                    if a['currency'] == "USD":
-                        return round(float(a['available']),2)
-
-
-
-
 
             try:
-                available_currency = available_currency()
-                availableUSD = available_USD()
-                print ("\n" * 2)
                 print ("_" * 30)
                 print ("\n GDAX Trade Wallet")
                 print ("_" * 30)
-                print ("\n Total " + currency + ": " + str('{:.8f}'.format(available_currency)))
-                print (" Total USD: " + str(availableUSD) + "\n")
+                try:
+                    accounts = gdax_authClient.get_accounts()
+                    for a in accounts:
+                        print('Currency: ' + a['currency'])
+                        print('Balance: ' + a['balance'])
+                        print('Available: ' + a['available'])
+                        print()
+                except:
+                    print("\nAPI ERROR")
                 print ("_" * 30)
-                # Get and print available USD
         
-                print ("\nChoose the buy and sell points: \n")
-                low = round(float(input("     Buy:  \n")),2)
-                high = round(float(input("    Sell:  \n")),2)
 
+                currency = input("\nTrade which currency? (e.g. 'BTC'): ")
+
+
+                def available_currency():
+                    accounts = gdax_authClient.get_accounts()
+                    for a in accounts:
+                        if a['currency'] == currency:
+                            return float(a['available'])
+
+                def available_USD():
+                    accounts = gdax_authClient.get_accounts()
+                    for a in accounts:
+                        if a['currency'] == "USD":
+                            return round(float(a['available']),2)
+
+                available_currency = available_currency()
+                availableUSD = available_USD()
+                
+
+                print ("\nChoose the buy and sell points: \n")
+                low = round(float(input("     Buy: ")),2)
+                high = round(float(input("    Sell: ")),2)
+
+                # DETECT CASH OR COIN
+
+                print ("\n What is that max amount of USD you wish to trade each buy/sell cycle? \n")
+                maxCash = round(float(input("     (For Max Leave Blank): ")),2)
 
 
 
