@@ -406,17 +406,21 @@ if access == True:
                 available_currency = available_currency()
                 availableUSD = available_USD()
                 print ("\n" * 2)
-                print ("_" * 20)
+                print ("_" * 30)
                 print ("\n GDAX Trade Wallet")
-                print ("_" * 20)
-                print ("\n Total " + currency + ": " + str(available_currency))
-                print (" Total USD: " + str(availableUSD) + ". \n")
-                print ("_" * 20)
+                print ("_" * 30)
+                print ("\n Total " + currency + ": " + str('{:.8f}'.format(available_currency)))
+                print (" Total USD: " + str(availableUSD) + "\n")
+                print ("_" * 30)
                 # Get and print available USD
         
                 print ("\nChoose the buy and sell points: \n")
-                low = float(input("     Buy:  "))
-                high = float(input("    Sell:  "))
+                low = round(float(input("     Buy:  \n")),2)
+                high = round(float(input("    Sell:  \n")),2)
+
+
+
+
 
                 #gdax_authClient.buy(price='100', size='1', product_id="BTC-USD")
 
