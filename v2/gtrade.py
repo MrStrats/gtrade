@@ -356,19 +356,18 @@ if access == True:
                         return round(float(a['available']),2)
 
 
-            available_currency = available_currency()
-            availableUSD = available_USD()
 
 
 
             try:
-
+                available_currency = available_currency()
+                availableUSD = available_USD()
                 print ("\n" * 2)
                 print ("_" * 20)
                 print ("\n GDAX Trade Wallet")
                 print ("_" * 20)
                 print ("\n Total " + currency + ": " + str(available_currency))
-                print (" Total USD: " + str(available_USD) + ". \n")
+                print (" Total USD: " + str(availableUSD) + ". \n")
 
                 # Get and print available USD
                 print ("\n Choose the buy and sell points: \n")
