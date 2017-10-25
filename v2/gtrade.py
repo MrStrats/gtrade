@@ -368,11 +368,12 @@ if access == True:
                 print ("_" * 20)
                 print ("\n Total " + currency + ": " + str(available_currency))
                 print (" Total USD: " + str(availableUSD) + ". \n")
-
+                print ("_" * 20)
                 # Get and print available USD
-                print ("\n Choose the buy and sell points: \n")
-                low = float(input("Buy:  "))
-                high = float(input("Sell:  "))
+        
+                print ("\nChoose the buy and sell points: \n")
+                low = float(input("     Buy:  "))
+                high = float(input("    Sell:  "))
 
                 #gdax_authClient.buy(price='100', size='1', product_id="BTC-USD")
 
