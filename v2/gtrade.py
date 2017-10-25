@@ -340,13 +340,16 @@ if access == True:
         ###############################################################################################
         # AUTO TRADE (Ping Method)
         elif choice == "3a":
-            print("\n* Enter the coin type: *\n")
+            print("\n* AUTO TRADE (Ping Method) *\n")
             currency = input("Currency? (e.g. 'BTC')  ")
+
+
+        
 
         ###############################################################################################
         # AUTO TRADE (Range Method)
         elif choice == "3b":
-            print("\n* Enter the coin type: *\n")
+            print("\n* AUTO TRADE (Bound Method) *\n")
             currency = input("Currency? (e.g. 'BTC')  ")
 
         ###############################################################################################
