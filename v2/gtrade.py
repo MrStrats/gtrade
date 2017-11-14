@@ -230,6 +230,9 @@ if access == True:
                             print("side: " + o["side"])
                             print("price: " + o["price"] + o['product_id'])
                             print("size: " + o["size"])
+                            print("type: " + o["type"])
+                            print("time in force: " + o["time_in_force"])
+                            print("post only: " + str(o["post_only"]))
                             print()
                 else:
                     print("No orders")
@@ -442,9 +445,8 @@ if access == True:
         ###############################################################################################
         # TESTING
         elif choice == "z.":
-            print('To be coded...')
-            test = gdax_public.get_product_ticker('ETH-USD')
-            print(test)
+            orders = gdax_authClient.get_orders()
+            print(orders)
 
         ###############################################################################################
         # SHOW MENU
