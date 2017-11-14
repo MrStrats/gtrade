@@ -116,13 +116,6 @@ if access == True:
     ################################################################################################
     ## FUNCTIONS
 
-    # Defining buy function
-    def gtrade_buy(inmarket, inprice, insize): #'ETH-USD'
-        gdax_authClient.buy(price=inprice, size=insize, product_id=inmarket)
-
-    # Defining sell function
-    def gtrade_sell(inmarket, inprice, insize): #'ETH-USD'
-        gdax_authClient.sell(price=inprice, size=insize, product_id=inmarket)
 
     ################################################################################################
     ## FUNCTIONS
@@ -196,23 +189,23 @@ if access == True:
                             # If rate = auto, find bid
                             if rate == "":
                                 rate = ticker['bid']
-                            gtrade_buy(market, round(rate, 2), round(volume, 8))
+                            gdax_authClient.buy(price=round(rate, 2), size=round(volume, 8), product_id=market)
                             print("\nOrder placed")
                         else:
                             # If rate = auto, find ask
                             if rate == "":
                                 rate = ticker['ask']
-                            gtrade_sell(market, round(rate, 2), round(volume, 8))
+                            gdax_authClient.sell(price=round(rate, 2), size=round(volume, 8), product_id=market)
                             print("\nOrder placed")
                     # Market order
                     elif order == "market":
                         if side == "buy":
                             rate = ticker['ask'] * 1.1 # high ask to ensure execution
-                            gtrade_buy(market, round(rate, 2), round(volume, 8))
+                            gdax_authClient.buy(price=round(rate, 2), size=round(volume, 8), product_id=market)
                             print("\nOrder placed")
                         else:
                             rate = ticker['bid'] * .9 # low bid to ensure execution
-                            gtrade_sell(market, round(rate, 2), round(volume, 8))
+                            gdax_authClient.sell(price=round(rate, 2), size=round(volume, 8), product_id=market)
                             print("\nOrder placed")
                     else:
                         print("\nCancelled")
@@ -306,8 +299,8 @@ if access == True:
 
                     # trade
                     n = 1
-                    for p in prices:  
-                        gtrade_sell(currency+'-USD', round(p, 2), round(amount, 8))
+                    for p in prices:
+                        gdax_authClient.sell(price=round(p, 2), size=round(amount, 8), product_id=currency+'-USD', post_only=True)
                         print("#" + str(n) + " - " + str(round(amount, 8)) + " sold at " + str(round(p, 2)))
                         time.sleep(sleep_sec)
                         n += 1
@@ -368,7 +361,7 @@ if access == True:
                     # trade
                     sumBought = 0
                     for i,p in enumerate(prices):  
-                        gtrade_buy(currency+'-USD', p, coinPerTx_real)
+                        gdax_authClient.buy(price=p, size=coinPerTx_real, product_id=currency+'-USD', post_only=True)
                         usdBought = round((p * coinPerTx_real) * (1 + GDAXfee), 2) # amount of usd bought
                         sumBought = round(sumBought + usdBought, 2) # total bought
                         print("#" + str(i+1) + " - " + str(coinPerTx_real) + " bought at " + str(p) + " for " + str(usdBought) + " - " + str(round(amountToTrade - sumBought, 2)))
