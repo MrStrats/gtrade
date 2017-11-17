@@ -141,14 +141,15 @@ if access == True:
         1b |  Show open orders
         1c |  Cancel all orders
 
-        2a  |  Spread Sell Orders
-        2b  |  Spread Buy Orders
+        2a |  Spread Sell Orders
+        2b |  Spread Buy Orders (evenly by size, uneven by value)
+        2c |  Spread Buy Orders (evenly by value, uneven by size)
 
         3a |  Auto Trade (Ping Method)
         3b |  Auto Trade (Range Bound) *Not Working*
 
         z. |  TESTING
-
+               
         ?  |  Menu
         ~  |  Market Summary
 
@@ -189,13 +190,13 @@ if access == True:
                             # If rate = auto, find bid
                             if rate == "":
                                 rate = ticker['bid']
-                            gdax_authClient.buy(price=round(rate, 2), size=round(volume, 8), product_id=market)
+                            gdax_authClient.buy(price=round(rate, 2), size=round(volume, 8), product_id=market, post_only=True)
                             print("\nOrder placed")
                         else:
                             # If rate = auto, find ask
                             if rate == "":
                                 rate = ticker['ask']
-                            gdax_authClient.sell(price=round(rate, 2), size=round(volume, 8), product_id=market)
+                            gdax_authClient.sell(price=round(rate, 2), size=round(volume, 8), product_id=market, post_only=True)
                             print("\nOrder placed")
                     # Market order
                     elif order == "market":
@@ -315,7 +316,7 @@ if access == True:
                 print("\nAPI ERROR: " + e)
 
         ###############################################################################################
-        # SPREAD BUY ORDERS
+        # SPREAD BUY ORDERS #1
         elif choice == "2b":
             print("\n* SPREAD BUY ORDERS *\n")
             currency = input("Currency? (e.g. 'BTC')  ")
@@ -375,7 +376,66 @@ if access == True:
             except:
                 e = sys.exc_info()[0]
                 print("\nAPI ERROR: " + e)
+
+        ###############################################################################################
+        # SPREAD BUY ORDERS #2
+        elif choice == "2c":
+            print("\n* SPREAD BUY ORDERS *\n")
+            currency = input("Currency? (e.g. 'BTC')  ")
+
+            def available_USD():
+                accounts = gdax_authClient.get_accounts()
+                for a in accounts:
+                    if a['currency'] == "USD":
+                        return round(float(a['available']),2)
+
+            try:
+                # Get and print available USD
+                availableUSD = available_USD()
+                print("Available to trade:  " + str(availableUSD))
+
+                # Get inputs
+                amountToTrade = float(input("\nAmount to trade:  "))
+                low = float(input("Buy - Low:  "))
+                high = float(input("Buy - High:  "))
+                coinPerTx_user = float(input("Min " + currency + " per tx (estimate):  "))
+                sleep_sec = 1
+
+                # Cap amount to trade at amount available
+                amountToTrade = availableUSD if amountToTrade > availableUSD else amountToTrade
+
+                # GDAX fee
+                GDAXfee = .0025 # held even for limit orders
+
+                # Calculate       
+                minBuyPrice = high * coinPerTx_user * (1 + GDAXfee) + .1 # minimum buyin, ADD $.1 AS FIX TO LEAVE A LITTLE REMAINING
+                transactions = math.floor(amountToTrade / minBuyPrice)
+                increment = round((high - low) / (transactions - 1), 2)
+
+                # make price list
+                prices = []
+                for i in range(transactions):
+                    p = round(low + (increment * i), 2) # round 2 for usd
+                    prices.append(p)
+                  
+                # Trade
+                print ("\nTrading $" + str(amountToTrade) + " worth of BTC between " + str(low) + " - " + str(high))
+                time.sleep(5)
+                print("\nPlacing", transactions, "orders...")
+
+                sumBought = 0
+                for i,p in enumerate(prices):  
+                    size = round( (high * coinPerTx_user) / p, 8) # round 8 for satoshi
+                    gdax_authClient.buy(price=p, size=size, product_id=currency+'-USD', post_only=True)
+                    usdBought = round((p * size) * (1 + GDAXfee), 2) # amount of usd bought
+                    sumBought = round(sumBought + usdBought, 2) # total bought
+                    print("#" + str(i+1) + " - " + str(size) + " bought at " + str(p) + " for " + str(usdBought) + " - " + str(round(amountToTrade - sumBought, 2)))
+                    time.sleep(sleep_sec)
                 
+            except:
+                print("ERROR")
+
+
         ###############################################################################################
         # AUTO TRADE (Ping Method)
         elif choice == "3a":
